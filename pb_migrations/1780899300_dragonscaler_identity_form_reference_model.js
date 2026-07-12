@@ -139,21 +139,22 @@ const numberField = (
     name,
     {
         required = false,
+        min = null,
+        onlyInt = false,
     } = {},
 ) => ({
     help: "",
     hidden: false,
     id,
     max: null,
-    min: null,
+    min,
     name,
-    onlyInt: false,
+    onlyInt,
     presentable: false,
     required,
     system: false,
     type: "number",
 });
-
 
 const selectField = (
     id,
@@ -497,6 +498,22 @@ const referenceImagesCollection = () => baseCollection({
         jsonField("ref_anchor", "anchor_point"),
         jsonField("ref_baseline_points", "baseline_points"),
         textField("ref_baseline_descriptor", "baseline_descriptor"),
+        numberField(
+            "ref_width_px",
+            "width_px",
+            {
+                min: 1,
+                onlyInt: true,
+            },
+        ),
+        numberField(
+            "ref_height_px",
+            "height_px",
+            {
+                min: 1,
+                onlyInt: true,
+            },
+        ),
     ],
 });
 
